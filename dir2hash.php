@@ -11,7 +11,7 @@ function getDirHashes($root, $dir, &$hashes = []) {
 	foreach ($files as $key => $value) {
 		$path = realpath($dir . DIRECTORY_SEPARATOR . $value);
 		if (!is_dir($path)) {
-			$hash = md5($path);
+			$hash = md5(file_get_contents($path));
 			$hashes[$hash][] = absolute2Relative($root, $path);
 		} else if ($value != "." && $value != "..") {
 			getDirHashes($root, $path, $hashes);
